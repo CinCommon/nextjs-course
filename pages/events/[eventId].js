@@ -6,6 +6,8 @@ import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
 import ErrorAlert from '../../components/ui/error-alert';
+import path from "path";
+import fs from "fs";
 
 function EventDetailPage() {
   const router = useRouter();
@@ -35,6 +37,20 @@ function EventDetailPage() {
       </EventContent>
     </Fragment>
   );
+}
+
+export async function getStaticProps(context) {
+    console.log(context);
+    const filePath = path.join(process.cwd(), 'data', 'dummy-data.json')
+    const dataStr = fs.readFileSync(filePath);
+    const data = JSON.parse(dataStr);
+    return {
+        props: {
+            products: data.products,
+            time: new Date().toLocaleTimeString()
+        },
+        revalidate: 5
+    };
 }
 
 export default EventDetailPage;

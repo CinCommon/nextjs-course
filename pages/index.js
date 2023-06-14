@@ -9,6 +9,7 @@ function HomePage(props) {
 
   return (
       <div>
+          <h1>{props.time}</h1>
         <EventList items={featuredEvents} />
       </div>
   );
@@ -20,8 +21,10 @@ export async function getStaticProps() {
     const data = JSON.parse(dataStr);
     return {
         props: {
-            products: data.products
-        }
+            products: data.products,
+            time: new Date().toLocaleTimeString()
+        },
+        revalidate: 5
     };
 }
 
