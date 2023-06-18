@@ -1,6 +1,4 @@
 import { getFeaturedEvents } from '../dummy-data';
-import fs from 'fs';
-import path from 'path'
 import EventList from '../components/events/event-list';
 
 function HomePage(props) {
@@ -16,12 +14,12 @@ function HomePage(props) {
 }
 
 export async function getStaticProps() {
-    const filePath = path.join(process.cwd(), 'data', 'dummy-data.json')
-    const dataStr = fs.readFileSync(filePath);
-    const data = JSON.parse(dataStr);
+    const response = await fetch("https://next-js-course-event-default-rtdb.asia-southeast1.firebasedatabase.app/events.json");
+    const json = response.json();
+    console.log(json);
     return {
         props: {
-            products: data.products,
+            products: [],
             time: new Date().toLocaleTimeString()
         },
         revalidate: 5
