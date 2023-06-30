@@ -13,7 +13,7 @@ function HomePage(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const response = await fetch("https://next-js-course-event-default-rtdb.asia-southeast1.firebasedatabase.app/events.json");
     const json = response.json();
     console.log(json);
@@ -21,10 +21,8 @@ export async function getStaticProps() {
         props: {
             products: [],
             time: new Date().toLocaleTimeString()
-        },
-        revalidate: 5
+        }
     };
 }
-
 
 export default HomePage;
