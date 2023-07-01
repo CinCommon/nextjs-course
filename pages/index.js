@@ -1,28 +1,34 @@
-import { getFeaturedEvents } from '../dummy-data';
+import Head from 'next/head';
+
+import { getFeaturedEvents } from '../helpers/api-util';
 import EventList from '../components/events/event-list';
+import NewsletterRegistration from '../components/input/newsletter-registration';
 
 function HomePage(props) {
-    console.log("HomePage", props)
-  const featuredEvents = getFeaturedEvents();
-
   return (
-      <div>
-          <h1>{props.time}</h1>
-        <EventList items={featuredEvents} />
-      </div>
+    <div>
+      <Head>
+        <title>NextJS Events</title>
+        <meta
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
+        />
+      </Head>
+      <NewsletterRegistration />
+      <EventList items={props.events} />
+    </div>
   );
 }
 
-export async function getServerSideProps() {
-    const response = await fetch("https://next-js-course-event-default-rtdb.asia-southeast1.firebasedatabase.app/events.json");
-    const json = response.json();
-    console.log(json);
-    return {
-        props: {
-            products: [],
-            time: new Date().toLocaleTimeString()
-        }
-    };
+export async function getStaticProps() {
+  const featuredEvents = await getFeaturedEvents();
+
+  return {
+    props: {
+      events: featuredEvents,
+    },
+    revalidate: 1800,
+  };
 }
 
 export default HomePage;
