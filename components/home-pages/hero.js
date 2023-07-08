@@ -1,4 +1,4 @@
-import classes from './hero.modules.css'
+import classes from './hero.module.css'
 
 const Hero = () => {
     return (

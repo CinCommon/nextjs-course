@@ -39,3 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 1. create pages: home, contact, all blog posts, individual blog post;
+2. create /components/layout/logo.js
+3. create /components/layout/layout.js
+4. create /components/layout/main-navigation.js -- return <header> elements with logo.js and <nav />
+
