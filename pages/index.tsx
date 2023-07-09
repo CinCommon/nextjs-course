@@ -1,6 +1,7 @@
 import {getFeaturedEvents} from '../helpers/api-util';
 import {Fragment} from "react";
 import Hero from "../components/home-pages/hero";
+import {GetStaticProps} from "next";
 
 function HomePage(props) {
   return (
@@ -10,7 +11,7 @@ function HomePage(props) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const featuredEvents = await getFeaturedEvents();
 
   return {

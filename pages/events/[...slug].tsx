@@ -10,7 +10,7 @@ import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 
 function FilteredEventsPage(props) {
-  const [loadedEvents, setLoadedEvents] = useState();
+  const [loadedEvents, setLoadedEvents] = useState<any[]>();
   const router = useRouter();
 
   const filterData = router.query.slug;
