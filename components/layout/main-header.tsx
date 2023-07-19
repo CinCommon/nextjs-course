@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import classes from './main-header.module.css';
-import {useTranslation} from "next-i18next";
+import {useTranslation} from "react-i18next";
 
 function MainHeader() {
     const i18n = useTranslation();
@@ -12,7 +12,7 @@ function MainHeader() {
             <nav>
                 <ul>
                     <li>
-                        <Link href={'/tags'}>{i18n.t("header.tags")}</Link>
+                        <Link href={'/tags'}><div>{i18n.t('header.tags')}</div></Link>
                     </li>
                     <li>
                         <Link href={'/contact'}>Contact</Link>

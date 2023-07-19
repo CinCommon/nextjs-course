@@ -1,5 +1,6 @@
 import classes from './hero.module.css'
 import Image from "next/image";
+import PostsMainContainer from "../posts/posts-main-container";
 
 const Hero = () => {
     return (
@@ -11,6 +12,7 @@ const Hero = () => {
             <p>
                 I Blog about DevOps and Languages Knowledge.
             </p>
+            <PostsMainContainer />
         </section>
     )
 }
