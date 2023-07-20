@@ -4,21 +4,20 @@ import classes from './main-header.module.css';
 import {useTranslation} from "react-i18next";
 
 function MainHeader() {
-    const i18n = useTranslation();
-    console.log(i18n);
+    const [t] = useTranslation();
     return (
         <header className={classes.header}>
             <div className={classes.logo}>Steven' Blog</div>
             <nav>
                 <ul>
                     <li>
-                        <Link href={'/tags'}><div>{i18n.t('header.tags')}</div></Link>
+                        <Link href={'/tags'}><div>{t`header.tags`}</div></Link>
                     </li>
                     <li>
-                        <Link href={'/contact'}>Contact</Link>
+                        <Link href={'/contact'}>{t`header.contact`}</Link>
                     </li>
                     <li>
-                        <Link href={'/posts'}>All Posts</Link>
+                        <Link href={'/posts'}>{t`header.allPosts`}</Link>
                     </li>
                 </ul>
             </nav>

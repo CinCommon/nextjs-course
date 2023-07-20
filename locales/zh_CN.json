@@ -1,5 +1,7 @@
 {
   "header": {
-    "tags": "标签"
+    "tags": "TAGS",
+    "contact": "CONTACT",
+    "allPosts": "All POSTS"
   }
 }

@@ -1,6 +1,7 @@
 {
   "header": {
     "tags": "TAGS",
-    "Hello": "こんにちは"
+    "contact": "CONTACT",
+    "allPosts": "All POSTS"
   }
 }
