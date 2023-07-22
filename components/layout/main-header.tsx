@@ -7,11 +7,17 @@ function MainHeader() {
     const [t] = useTranslation();
     return (
         <header className={classes.header}>
-            <div className={classes.logo}>Steven' Blog</div>
+            <div className={classes.logo}>
+                <Link href={'/'}  >
+                    Steven' Blog
+                </Link>
+            </div>
             <nav>
                 <ul>
                     <li>
-                        <Link href={'/tags'}><div>{t`header.tags`}</div></Link>
+                        <Link href={'/tags'}>
+                            <div>{t`header.tags`}</div>
+                        </Link>
                     </li>
                     <li>
                         <Link href={'/contact'}>{t`header.contact`}</Link>
