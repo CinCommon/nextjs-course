@@ -33,10 +33,6 @@ function MainFooter() {
                     </Link>
                 </div>
             </div>
-            {/*Twitter*/}
-            {/*Linkedin*/}
-            {/*Github*/}
-            {/*Blog*/}
         </footer>
     );
 }
