@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-const Hero = () => {
+
+const Hero = ({ posts }) => {
     return (
         <section className="bg-gray-700 bg-subtle-grid-pattern pt-32 pb-16 text-center">
             <div
@@ -11,6 +12,9 @@ const Hero = () => {
             <p className="mt-2 text-lg text-gray-200 max-w-2xl mx-auto">
                 I Blog about DevOps and Languages Knowledge.
             </p>
+            {
+                posts.length
+            }
         </section>);
 }
 

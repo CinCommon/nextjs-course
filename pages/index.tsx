@@ -2,23 +2,23 @@ import {getFeaturedEvents} from '../helpers/api-util';
 import {Fragment} from "react";
 import Hero from "../components/home-pages/hero";
 import {GetStaticProps} from "next";
-import {getPostContents, getPostNames} from "../helpers/posts-utils";
+import {getPostContents} from "../helpers/posts-utils";
 
 function HomePage(props) {
   return (
     <Fragment>
-      <Hero />
+      <Hero posts={props.posts}/>
     </Fragment>
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getPostContents();
-  console.log('getStaticProps:', posts)
+export const getStaticProps: GetStaticProps = () => {
+  const posts = getPostContents();
+  console.log(posts);
 
   return {
     props: {
-      posts: [],
+      posts,
     },
     revalidate: 1800,
   };

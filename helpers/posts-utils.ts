@@ -1,14 +1,38 @@
-import matter from 'gray-matter';
-import { readFile, readdir } from 'node:fs/promises';
-export async function getPostNames(): Promise<string[]> {
-    return (await readdir(`${process.cwd()}/data/`, {withFileTypes: true, recursive: true}))
-        .filter(item => item.isFile())
-        .map(item => `${item.path}/${item.name}`);
+import * as grayMatter from 'gray-matter';
+import fs from 'fs';
+
+const path = require('path');
+
+
+// Function to get all files in a directory recursively
+function getPostNames(dir = `${process.cwd()}/data/`, files = []) {
+    files = files || [];
+    const filesInDir = fs.readdirSync(dir);
+    for (let i = 0; i < filesInDir.length; i++) {
+        const file = `${dir}/${filesInDir[i]}`;
+        if (fs.statSync(file).isDirectory()) {
+            getPostNames(file, files);
+        } else {
+            files.push(file);
+        }
+    }
+    return files;
 }
 
-export async function getPostContents(): Promise<Promise<matter.GrayMatterFile<Buffer>>[]> {
-    const names = await getPostNames();
-    const contents = names.map(name => readFile(name))
-    return contents.map(async content => matter(await content));
+export interface PostProp {
+    data: { [key: string]: any }
+    content: string
+    excerpt?: string
+    language?: string
+}
+
+export function getPostContents(): PostProp[] {
+    const names = getPostNames();
+    const contents = names
+        .map(name => fs.readFileSync(name, {encoding: "utf-8"}))
+    return contents.map(str => {
+        const {data, content, excerpt, language = 'en_US', ...rest} = grayMatter(str);
+        return { data, content, excerpt, language }
+    });
 }
 
