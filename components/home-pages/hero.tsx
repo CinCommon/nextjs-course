@@ -12,9 +12,6 @@ const Hero = ({ posts }) => {
             <p className="mt-2 text-lg text-gray-200 max-w-2xl mx-auto">
                 I Blog about DevOps and Languages Knowledge.
             </p>
-            {
-                posts.length
-            }
         </section>);
 }
 

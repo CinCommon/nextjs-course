@@ -3,18 +3,19 @@ import {Fragment} from "react";
 import Hero from "../components/home-pages/hero";
 import {GetStaticProps} from "next";
 import {getPostContents} from "../helpers/posts-utils";
+import FeaturedPosts from "../components/posts/featured-posts";
 
 function HomePage(props) {
   return (
     <Fragment>
-      <Hero posts={props.posts}/>
+      <Hero/>
+      <FeaturedPosts postProps={props.posts}/>
     </Fragment>
   );
 }
 
 export const getStaticProps: GetStaticProps = () => {
   const posts = getPostContents();
-  console.log(posts);
 
   return {
     props: {

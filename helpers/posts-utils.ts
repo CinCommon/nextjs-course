@@ -1,5 +1,6 @@
 import * as grayMatter from 'gray-matter';
 import fs from 'fs';
+import {PostProp} from "../props/PostProp";
 
 const path = require('path');
 
@@ -17,13 +18,6 @@ function getPostNames(dir = `${process.cwd()}/data/`, files = []) {
         }
     }
     return files;
-}
-
-export interface PostProp {
-    data: { [key: string]: any }
-    content: string
-    excerpt?: string
-    language?: string
 }
 
 export function getPostContents(): PostProp[] {

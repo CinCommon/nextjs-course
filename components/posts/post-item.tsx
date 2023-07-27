@@ -2,18 +2,7 @@ import classes from './post-item.module.css'
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-
-interface Post {
-    date: string;
-    title: string;
-    excerpt: string;
-    slug: string;
-    image: string;
-}
-
-interface PostItemProps {
-    post: Post;
-}
+import {PostItemProps} from "../../props/PostProp";
 
 const PostItem: React.FC<PostItemProps> = (props) => {
     const {date, title, excerpt, slug, image} = props.post;
