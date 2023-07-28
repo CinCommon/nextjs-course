@@ -6,7 +6,7 @@ import IconTwitter from "../icons/Icon-twitter";
 function MainFooter() {
     return (
         <footer className="bg-gray-900 text-gray-300 py-8">
-            <div className="max-w-6xl mx-auto flex justify-between">
+            <div className="px-[10%] mx-auto flex justify-between">
                 <div>
                     <h2 className="text-lg font-semibold uppercase">
                         <Link href={"/"}>

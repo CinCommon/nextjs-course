@@ -3,6 +3,7 @@ export interface PostProp {
     content: string
     excerpt?: string
     language?: string
+    category?: string[]
 }
 
 

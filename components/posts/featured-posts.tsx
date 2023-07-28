@@ -1,6 +1,7 @@
 import {PostProp} from "../../props/PostProp";
 import {Fragment} from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface FeaturePostsProps {
     postProps: PostProp[]
@@ -10,13 +11,12 @@ const FeaturedPosts: React.FC<FeaturePostsProps> = (props) => {
     const {postProps} = props;
     return (
         <Fragment>
-
-
             <div className="px-[10%] py-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {
-                        postProps.map(post => (
-                            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                        postProps.map(({data, excerpt}) => (
+                            <Link href={data?.url || ''} target={"_blank"}>
+                            <div className="cursor-pointer bg-white rounded-lg shadow-md overflow-hidden">
                                 <Image
                                     className="w-full h-48 object-cover"
                                     width={400}
@@ -26,10 +26,10 @@ const FeaturedPosts: React.FC<FeaturePostsProps> = (props) => {
                                 />
                                 <div className="p-4">
                                     <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
-                                        {"ABC TITLE"}
+                                        {data?.title}
                                     </h3>
                                     <p className="text-gray-500 text-sm mt-2">
-                                        {"here are some words"}
+                                        {excerpt}
                                     </p>
                                     <div className="mt-4 flex items-center">
                                         <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -40,7 +40,8 @@ const FeaturedPosts: React.FC<FeaturePostsProps> = (props) => {
                                         <span className="text-sm text-gray-400 ml-1">{"18 Nov 2022"}</span>
                                     </div>
                                 </div>
-                            </div>)
+                            </div>
+                            </Link>)
                         )
                     }
                 </div>
