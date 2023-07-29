@@ -15,7 +15,7 @@ const Posts: React.FC<PostsProps> = () => {
                     src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
                     className="w-full object-cover" alt=""/>
             </div>
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black"></div>
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black"/>
             <div className="absolute inset-x-0 bottom-0 z-20 p-4">
                 <p className="mb-1 text-sm text-white text-opacity-80">Andrea Felsted • <time>18 Nov 2022</time></p>
                 <h3 className="text-xl font-medium text-white">Migrating to Sailboat UI</h3>

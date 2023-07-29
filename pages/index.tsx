@@ -2,7 +2,7 @@ import {getFeaturedEvents} from '../helpers/api-util';
 import {Fragment} from "react";
 import Hero from "../components/home-pages/hero";
 import {GetStaticProps} from "next";
-import {getPostContents} from "../helpers/posts-utils";
+import {getPostsContents} from "../helpers/posts-utils";
 import FeaturedPosts from "../components/posts/featured-posts";
 
 function HomePage(props) {
@@ -15,7 +15,7 @@ function HomePage(props) {
 }
 
 export const getStaticProps: GetStaticProps = () => {
-  const posts = getPostContents();
+  const posts = getPostsContents();
 
   return {
     props: {

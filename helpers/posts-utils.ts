@@ -2,31 +2,29 @@ import * as grayMatter from 'gray-matter';
 import fs from 'fs';
 import {PostProp} from "../props/PostProp";
 
-const path = require('path');
-
-
 // Function to get all files in a directory recursively
-function getPostNames(dir = `${process.cwd()}/data/`, files = []) {
+export function getPostNames(dir = `${process.cwd()}/data`, files = []) {
     files = files || [];
     const filesInDir = fs.readdirSync(dir);
     for (let i = 0; i < filesInDir.length; i++) {
         const file = `${dir}/${filesInDir[i]}`;
         if (fs.statSync(file).isDirectory()) {
             getPostNames(file, files);
-        } else {
+        } else if (file.endsWith('.md')){
             files.push(file);
         }
     }
     return files;
 }
 
-export function getPostContents(): PostProp[] {
+export function getPostsContents(): PostProp[] {
     const names = getPostNames();
-    const contents = names
-        .map(name => fs.readFileSync(name, {encoding: "utf-8"}))
-    return contents.map(str => {
-        const {data, content, excerpt, language = 'en_US', ...rest} = grayMatter(str);
-        return { data, content, excerpt, language }
-    });
+    return names
+        .map(name => getPostContent(name))
 }
 
+export function getPostContent(filePath): PostProp {
+    const str = fs.readFileSync(filePath, {encoding: "utf-8"});
+    const {data, content, excerpt, language = 'en_US', ...rest} = grayMatter(str);
+    return { data, content, excerpt, language };
+}
