@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 
-const Hero = ({ posts }) => {
+const Hero = () => {
     return (
         <section className="bg-gray-700 bg-subtle-grid-pattern pt-32 pb-16 text-center">
             <div

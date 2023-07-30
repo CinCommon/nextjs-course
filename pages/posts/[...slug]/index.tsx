@@ -1,40 +1,25 @@
-import {getPostContent, getPostNames} from "../../../helpers/posts-utils";
-import ReactMarkdown from "react-markdown";
+import Head from 'next/head';
+import {getFileRelativePath, getPostContent, getPostNames} from "../../../helpers/posts-utils";
 import {PostProp} from "../../../props/PostProp";
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import {dark} from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import React from "react";
+import PostContent from "@/components/posts/post-content";
 
-const PostDetail: React.FC<PostProp> = ({postProp}: PostProp) => {
-    const components = {
-        code({node, inline, className, children, ...props}) {
-            const match = /language-(\w+)/.exec(className || '')
-            return !inline && match ? (
-                <SyntaxHighlighter
-                    {...props}
-                    children={String(children).replace(/\n$/, '')}
-                    style={dark}
-                    language={match[1]}
-                    PreTag="div"
-                />
-            ) : (
-                <code {...props} className={className}>
-                    {children}
-                </code>
-            )
-        }
-    };
+interface PostDetailProps {
+    postProp: PostProp
+}
+
+const PostDetail: React.FC<PostDetailProps> = ({postProp}: PostDetailProps) => {
     return <>
+        <Head>
+        <title>{postProp.data?.title}</title>
+        <meta name='description' content={postProp.excerpt} />
+        </Head>
         <div className="px-4 py-8 max-w-3xl mx-auto">
             <h1 className="uppercase text-2xl font-bold text-indigo-600">
                 {postProp.data?.title}
             </h1>
-            <div className="bg-gray-100 p-4 mt-4 rounded-lg">
-                <ReactMarkdown
-                    components={components}
-                >{postProp.content}</ReactMarkdown>
-            </div>
         </div>
+        <PostContent postProp={postProp}/>
     </>;
 }
 
@@ -48,15 +33,12 @@ export const getStaticProps = (context) => {
     }
 }
 
-export const getStaticPaths = (context) => {
+export const getStaticPaths = () => {
     const prefixLength = `${process.cwd()}/data/`.length
     const postsNames = getPostNames();
-    // .map((postsName: string) => postsName.substring(prefixLength))
-    // .map(((value: string) => encodeURI(value)));
     const paths = postsNames.map(name => {
-        const slug = name.substring(prefixLength).split('/');
         return {
-            params: {slug}
+            params: {slug: getFileRelativePath(name, prefixLength).split('/')}
         }
     });
     return {

@@ -1,6 +1,6 @@
-import * as grayMatter from 'gray-matter';
+import grayMatter from 'gray-matter';
 import fs from 'fs';
-import {PostProp} from "../props/PostProp";
+import { PostProp } from "../props/PostProp";
 
 // Function to get all files in a directory recursively
 export function getPostNames(dir = `${process.cwd()}/data`, files = []) {
@@ -10,7 +10,7 @@ export function getPostNames(dir = `${process.cwd()}/data`, files = []) {
         const file = `${dir}/${filesInDir[i]}`;
         if (fs.statSync(file).isDirectory()) {
             getPostNames(file, files);
-        } else if (file.endsWith('.md')){
+        } else if (file.endsWith('.md')) {
             files.push(file);
         }
     }
@@ -24,7 +24,12 @@ export function getPostsContents(): PostProp[] {
 }
 
 export function getPostContent(filePath): PostProp {
-    const str = fs.readFileSync(filePath, {encoding: "utf-8"});
-    const {data, content, excerpt, language = 'en_US', ...rest} = grayMatter(str);
-    return { data, content, excerpt, language };
+    const str = fs.readFileSync(filePath, { encoding: "utf-8" });
+    const { data, content, excerpt, language = 'en_US', ...rest } = grayMatter(str);
+    return { data: { ...data, link: `posts/${encodeURI(getFileRelativePath(filePath))}` }, content, excerpt, language };
 }
+
+export function getFileRelativePath(filePath: string,
+    prefixLength: number = `${process.cwd()}/data/`.length): string {
+    return filePath.substring(prefixLength);
+};

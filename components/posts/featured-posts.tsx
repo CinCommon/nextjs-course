@@ -15,7 +15,7 @@ const FeaturedPosts: React.FC<FeaturePostsProps> = (props) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {
                         postProps.map(({data, excerpt}) => (
-                            <Link href={data?.url || ''} target={"_blank"}>
+                            <Link key={data?.link} href={data?.link || ''} target={"_blank"}>
                             <div className="cursor-pointer bg-white rounded-lg shadow-md overflow-hidden">
                                 <Image
                                     className="w-full h-48 object-cover"
